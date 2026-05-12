@@ -8,6 +8,11 @@ def main():
 
         # Take in user input
         command = input("")
+
+        # Stop the REPL loop/Shell by entering "exit"
+        if (command == "exit"):
+            break
+
         print(f"{command}: command not found")
 
 

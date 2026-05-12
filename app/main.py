@@ -8,12 +8,18 @@ def main():
 
         # Take in user input
         command = input("")
+        arguements = command.split(" ")
 
         # Stop the REPL loop/Shell by entering "exit"
         if (command == "exit"):
             break
+        
+        # Implement the "echo" command
+        elif (arguements[0] == "echo"):
+            print(" ".join(arguements[1:]))
 
-        print(f"{command}: command not found")
+        else:
+            print(f"{command}: command not found")
 
 
 if __name__ == "__main__":

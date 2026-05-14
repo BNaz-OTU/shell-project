@@ -24,26 +24,27 @@ def main():
         # Implemnt the "type" command, will help check to see what type something is
         elif (command == "type"):
             
-            path_var = os.environ.get("PATH")
-            directory_paths = path_var.split(":")
-            # print(directory_paths)
-
-            for dir in directory_paths:
-                print(dir)
-                
-            for dir in directory_paths:
-                if (os.access(dir, os.X_OK)):
-                    print(f"{command} is {dir}")
-                    break
-            
             # CASE 1: BUILTIN
             if (arguements[1] in BUILTINS):
                 print(f"{arguements[1]} is a shell builtin")
-
-
-            # CASE 3: NOT FOUND
+            
+            # CASE 2: CHECK PATH
             else:
-                print(f"{arguements[1]}: not found")
+                path_var = os.environ.get("PATH")
+                directory_paths = path_var.split(":")
+                found_file_path_flag = False
+
+                for dir in directory_paths:
+                    file_path = os.path.join(dir, arguements[1])
+
+                    if (os.access(file_path, os.X_OK)):
+                        print(f"{arguements[1]} is {file_path}")
+                        found_file_path_flag = True
+                        break
+
+                # CASE 3: NOT FOUND
+                if (found_file_path_flag == False):
+                    print(f"{arguements[1]}: not found")
 
         else:
             print(f"{command}: command not found")

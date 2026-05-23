@@ -1,4 +1,4 @@
-import sys, os
+import sys, os, subprocess
 
 BUILTINS = {"echo", "type", "exit"}
 
@@ -21,7 +21,7 @@ def main():
         elif (command == "echo"):
             print(" ".join(arguements[1:]))
         
-        # Implemnt the "type" command, will help check to see what type something is
+        # Implement the "type" command, will help check to see what type something is
         elif (command == "type"):
             
             # CASE 1: BUILTIN
@@ -47,8 +47,19 @@ def main():
                     print(f"{arguements[1]}: not found")
 
         else:
-            print(f"{command}: command not found")
+            path_var = os.environ.get("PATH")
+            directory_paths = path_var.split(":")
+            command_not_found_flag = False
 
+            for path in directory_paths:
+                cmd_path = path + "/" + command
+
+                if (os.access(cmd_path, os.X_OK)):
+                    subprocess.run(arguements)
+                    command_not_found_flag = True
+
+            if (command_not_found_flag == False):
+                print(f"{command}: command not found")
 
 if __name__ == "__main__":
     main()

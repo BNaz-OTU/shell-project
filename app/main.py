@@ -1,6 +1,6 @@
 import sys, os, subprocess
 
-BUILTINS = {"echo", "type", "exit"}
+BUILTINS = {"echo", "type", "exit", "pwd"}
 
 def main():
     # TODO: Uncomment the code below to pass the first stage
@@ -20,6 +20,10 @@ def main():
         # Implement the "echo" command
         elif (command == "echo"):
             print(" ".join(arguements[1:]))
+        
+        # Implement the "pwd" command
+        elif (command == "pwd"):
+            print(os.getcwd())
         
         # Implement the "type" command, will help check to see what type something is
         elif (command == "type"):
@@ -45,7 +49,8 @@ def main():
                 # CASE 3: NOT FOUND
                 if (found_file_path_flag == False):
                     print(f"{arguements[1]}: not found")
-
+        
+        # Unknown command
         else:
             path_var = os.environ.get("PATH")
             directory_paths = path_var.split(":")

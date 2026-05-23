@@ -26,22 +26,9 @@ def main():
             print(os.getcwd())
         
         elif (command == "cd"):
-            path_var = os.listdir("/")
-            print(path_var)
-            directory_paths = path_var.split(":")
-            found_file_path_flag = False
-            
-            # Iterate through the list of paths to find the path that was provided
-            # in the command line arguement.
-            print(directory_paths)
-            for path in directory_paths:
-                print(arguements[1], " ||| ", path, arguements[1] == path)
-                if (arguements[1] == path):
-                    os.chdir(path)
-                    found_file_path_flag = True
-                    break
-            
-            if (found_file_path_flag == False):
+            if (os.path.isdir(arguements[1])):
+                os.chdir(arguements[1])
+            else:
                 print(f"cd: {arguements[1]}: No such file or directory")
         
         # Implement the "type" command, will help check to see what type something is

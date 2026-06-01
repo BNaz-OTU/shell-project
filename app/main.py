@@ -28,6 +28,9 @@ def main():
         elif (command == "cd"):
             if (os.path.isdir(arguements[1])):
                 os.chdir(arguements[1])
+            elif (arguements[1] == "~"):
+                home_dir = os.getenv("HOME")
+                os.chdir(home_dir)
             else:
                 print(f"cd: {arguements[1]}: No such file or directory")
         

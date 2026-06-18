@@ -179,3 +179,5 @@ pyproject.toml
 codecrafters.yml
 .bashfiles/
 .python-version
+
+.DS_Store

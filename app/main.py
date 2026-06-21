@@ -1,3 +1,5 @@
+from utils.command_parse import command_line_parser
+
 import sys, os, subprocess
 
 BUILTINS = {"echo", "type", "exit", "pwd", "cd"}
@@ -9,8 +11,9 @@ def main():
 
         # Take in user input
         command_line = input("")
-        arguements = command_line.split(" ")
 
+        arguements = command_line_parser(command_line)
+        
         command = arguements[0] # Have the command/first value put in the prompt
 
         # Stop the REPL loop/Shell by entering "exit"
@@ -71,6 +74,7 @@ def main():
                 if (os.access(cmd_path, os.X_OK)):
                     subprocess.run(arguements)
                     command_not_found_flag = True
+                    break
 
             if (command_not_found_flag == False):
                 print(f"{command}: command not found")

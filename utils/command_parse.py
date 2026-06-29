@@ -8,7 +8,8 @@ def command_line_parser(command_line):
     double_quote_flag = False # Flag to help find DOUBLE quotes
 
     tempToken = ""
-    for idx in range(len(command_line_stripped) + 1):
+    idx = 0
+    while idx < len(command_line_stripped) + 1:
         # If it reaches the last idx in command line append the remaining/leftover word
         if (idx == len(command_line_stripped)):
             if (tempToken != ""):
@@ -19,7 +20,11 @@ def command_line_parser(command_line):
         char = command_line_stripped[idx]
 
         # First check if value is an already opened "double quote"
-        if (double_quote_flag == True):
+        if (char == "\\" and idx < len(command_line_stripped)):
+            tempToken += command_line_stripped[idx + 1]
+            idx += 1
+
+        elif (double_quote_flag == True):
             if (char == "\""):
                 double_quote_flag = False
             else:
@@ -45,6 +50,7 @@ def command_line_parser(command_line):
             
             # If there is an empty space ignore it and continue
             elif (char == " " and tempToken == ""):
+                idx += 1
                 continue
             
             elif (char == " " and tempToken != ""):
@@ -53,5 +59,7 @@ def command_line_parser(command_line):
             
             else:
                 tempToken += char
+        
+        idx += 1
 
     return tokens

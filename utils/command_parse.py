@@ -19,11 +19,12 @@ def command_line_parser(command_line):
 
         char = command_line_stripped[idx]
 
-        # First check if value is an already opened "double quote"
-        if (char == "\\" and idx < len(command_line_stripped)):
+        # Case when there is a '\' (backslash) and is not within single quotes
+        if (single_quote_flag == False and char == "\\" and idx < len(command_line_stripped)):
             tempToken += command_line_stripped[idx + 1]
             idx += 1
 
+        # First check if value is an already opened "double quote"
         elif (double_quote_flag == True):
             if (char == "\""):
                 double_quote_flag = False

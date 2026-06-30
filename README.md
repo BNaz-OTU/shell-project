@@ -4,6 +4,14 @@ TODO:
 
 - Redirection
 
+  - Implement support for redirecting a command's output to a file.
+
+  - Implement support for redirecting a command's standard error to a file.
+
+  - Implement support for appending the output of a command to a file.
+
+  - Implement support for appending the command's standard error to a file.
+
 - Command Completion
 
 - Filename Completion

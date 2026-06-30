@@ -2,8 +2,6 @@ Initialization of the Shell Project
 
 TODO:
 
-- Quoting
-
 - Redirection
 
 - Command Completion
